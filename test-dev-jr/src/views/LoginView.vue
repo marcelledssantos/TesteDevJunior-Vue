@@ -24,7 +24,8 @@
           @blur="validarSenha"
         />
       </div>
-      <button @click="entrar">Entrar</button>
+
+      <ButtonComponent label="Entrar" @click="entrar" />
     </div>
   </div>
 </template>
@@ -33,9 +34,13 @@
 import { defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
+import ButtonComponent from '@/components/ButtonComponent.vue'
 
 export default defineComponent({
   name: 'LoginView',
+  components: {
+    ButtonComponent,
+  },
   setup() {
     const usuario = ref('')
     const senha = ref('')
@@ -183,7 +188,7 @@ export default defineComponent({
   text-align: center;
   box-shadow:
     inset 2px 2px 5px rgba(0, 0, 0, 0.2),
-    inset -2px -2px 5px rgba(255, 255, 255, 0.2); /* Efeito 3D */
+    inset -2px -2px 5px rgba(255, 255, 255, 0.2);
   background-color: #f0f0f0;
 }
 
