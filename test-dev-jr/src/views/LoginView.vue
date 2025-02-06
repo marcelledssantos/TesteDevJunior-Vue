@@ -115,10 +115,7 @@ export default defineComponent({
 }
 
 .image-container {
-  position: fixed;
-  top: 50px;
-  left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(0%);
   width: 80%;
   height: calc(100vh - 50px);
   background-image: url('../assets/electric-grid.jpg');

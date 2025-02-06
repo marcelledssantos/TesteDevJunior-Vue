@@ -29,94 +29,77 @@
         <p v-if="erroNome" class="error-message">{{ erroNome }}</p>
       </div>
 
-      <!-- Botão para adicionar -->
       <div class="button-group">
         <button @click="adicionarRede" :disabled="!!erroCodigo || !!erroNome">Adicionar</button>
       </div>
 
-      <!-- Tabela de redes adicionadas -->
       <TabelaRedesMT :redes="redesAdicionadas" @removerRede="removerRede" />
     </fieldset>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, defineEmits } from "vue";
-import TabelaRedesMT from "@/components/TabelaRedesMT.vue"; // Importando a tabela
+import { reactive, ref, defineEmits } from 'vue'
+import TabelaRedesMT from '@/components/TabelaRedesMT.vue'
 
-const emit = defineEmits(["atualizarRedes"]); // Emitir evento para o pai
+const emit = defineEmits(['atualizarRedes'])
 
-// 🔥 Estado local para os dados da rede
 const rede = reactive({
-  codigo: "",
-  nome: "",
-});
+  codigo: '',
+  nome: '',
+})
 
-const erroCodigo = ref("");
-const erroNome = ref("");
-const redesAdicionadas = ref<Array<{ codigo: string; nome: string }>>([]);
+const erroCodigo = ref('')
+const erroNome = ref('')
+const redesAdicionadas = ref<Array<{ codigo: string; nome: string }>>([])
 
-// 🔥 Formata o código para sempre ser MAIÚSCULO e ter no máximo 3 caracteres
 const formatarCodigoRede = () => {
-  rede.codigo = rede.codigo.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 3);
-};
+  rede.codigo = rede.codigo
+    .toUpperCase()
+    .replace(/[^A-Z]/g, '')
+    .slice(0, 3)
+}
 
-// 🔥 Validação do código (precisa ser único)
 const validarCodigo = () => {
-  erroCodigo.value = "";
-
-  if (!/^[A-Z0-9]{3}$/.test(rede.codigo)) {
-    erroCodigo.value = "O código deve ter exatamente 3 caracteres e conter apenas letras e números.";
-    return;
+  erroCodigo.value = ''
+  if (!/^[A-Z0-9]{1,3}$/.test(rede.codigo)) {
+    erroCodigo.value = 'O código pode ter no máximo 3 caracteres'
   }
+}
 
-  // 🔥 Verifica se o código já existe na lista antes de adicionar
-  const codigoDuplicado = redesAdicionadas.value.some((r) => r.codigo === rede.codigo);
-  if (codigoDuplicado) {
-    erroCodigo.value = "Código da rede já existe!";
-  }
-};
-
-// 🔥 Validação do nome
 const validarNome = () => {
-  erroNome.value = "";
+  erroNome.value = ''
   if (!rede.nome.trim()) {
-    erroNome.value = "O nome não pode estar vazio.";
+    erroNome.value = 'O nome não pode estar vazio.'
   }
-};
+}
 
-// 🔥 Adiciona uma rede à memória antes de salvar no banco
 const adicionarRede = () => {
-  validarCodigo();
-  validarNome();
+  validarCodigo()
+  validarNome()
 
   if (erroCodigo.value || erroNome.value) {
-    alert("Corrija os erros antes de adicionar.");
-    return;
+    alert('Corrija os erros antes de adicionar.')
+    return
   }
 
-  // 🔥 Adiciona a rede à lista em memória
-  redesAdicionadas.value.push({ codigo: rede.codigo, nome: rede.nome });
+  redesAdicionadas.value.push({ codigo: rede.codigo, nome: rede.nome })
 
-  // 🔥 Emitindo a atualização para o componente pai (InclusaoView.vue)
-  emit("atualizarRedes", [...redesAdicionadas.value]); // 🔥 Garante reatividade
+  emit('atualizarRedes', redesAdicionadas.value)
 
-  // 🔥 Limpar os campos após adicionar
-  rede.codigo = "";
-  rede.nome = "";
-};
+  rede.codigo = ''
+  rede.nome = ''
+}
 
-// 🔥 Função para remover uma rede
 const removerRede = (index: number) => {
-  redesAdicionadas.value.splice(index, 1);
-  emit("atualizarRedes", [...redesAdicionadas.value]); // 🔥 Garante atualização no pai
-};
+  redesAdicionadas.value.splice(index, 1)
+  emit('atualizarRedes', redesAdicionadas.value)
+}
 </script>
 
 <style scoped>
 .form-container {
-  width: 100%;
-  max-width: 400px;
+  width: 60%;
   margin: 10px auto;
   padding: 15px;
   background: #f8f8f8;
@@ -127,7 +110,6 @@ const removerRede = (index: number) => {
   color: #555;
 }
 
-/* Formulário */
 .form-group {
   margin-bottom: 12px;
   display: flex;
@@ -148,14 +130,14 @@ const removerRede = (index: number) => {
   border: 1px solid #888;
   border-radius: 5px;
   outline: none;
-  width: 100%;
+  width: 60%;
 }
 
-/* Botão Adicionar */
 .button-group {
   margin-top: 10px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  margin-left: 35%;
 }
 
 button {

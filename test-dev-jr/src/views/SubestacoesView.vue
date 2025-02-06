@@ -66,13 +66,9 @@ export default defineComponent({
       subestacoes.value = JSON.parse(route.query.data as string)
     }
 
-  
-
     const irParaInclusao = () => {
-  router.push("/inclusao");
-};
-
-    
+      router.push('/inclusao')
+    }
 
     return {
       subestacoes,
@@ -90,8 +86,6 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50vh;
-  transform: translateY(-50%);
 }
 
 h6 {

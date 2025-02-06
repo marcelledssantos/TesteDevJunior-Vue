@@ -2,7 +2,6 @@
   <div class="form-container">
     <fieldset>
       <legend>Subestação</legend>
-
       <div class="form-group">
         <label for="codigo">Código:</label>
         <input
@@ -10,7 +9,7 @@
           id="codigo"
           v-model="subestacao.codigo"
           @input="formatarCodigo"
-          placeholder="Digite o código (3 caracteres)"
+          placeholder="Digite o código"
           @blur="validarCodigo"
           maxlength="3"
         />
@@ -19,12 +18,7 @@
 
       <div class="form-group">
         <label for="nome">Nome:</label>
-        <input
-          type="text"
-          id="nome"
-          v-model="subestacao.nome"
-          placeholder="Digite o nome"
-        />
+        <input type="text" id="nome" v-model="subestacao.nome" placeholder="Digite o nome" />
       </div>
 
       <div class="form-group">
@@ -51,53 +45,54 @@
 </template>
 
 <script lang="ts" setup>
+import { ref, defineEmits } from 'vue'
 
-import { ref, defineEmits } from "vue";
+const emit = defineEmits(['atualizarDados'])
 
-const emit = defineEmits(["atualizarDados"]);
-
-// Estado local da subestação
 const subestacao = ref({
-  codigo: "",
-  nome: "",
-  latitude: "",
-  longitude: "",
-});
+  codigo: '',
+  nome: '',
+  latitude: '',
+  longitude: '',
+})
 
-const erroCodigo = ref("");
+const erroCodigo = ref('')
 
-// Formata o código para sempre ser MAIÚSCULO e ter no máximo 3 caracteres
 const formatarCodigo = () => {
-  subestacao.value.codigo = subestacao.value.codigo.toUpperCase().replace(/[^A-Z]/g, "").slice(0, 3);
-  emit("atualizarDados", subestacao.value);
-};
+  subestacao.value.codigo = subestacao.value.codigo
+    .toUpperCase()
+    .replace(/[^A-Z]/g, '')
+    .slice(0, 3)
+  emit('atualizarDados', subestacao.value)
+}
 
-// Valida o código da subestação
 const validarCodigo = () => {
-  erroCodigo.value = "";
+  erroCodigo.value = ''
 
   if (subestacao.value.codigo.length !== 3) {
-    erroCodigo.value = "O código deve ter exatamente 3 caracteres.";
+    erroCodigo.value = 'O código deve ter exatamente 3 caracteres.'
   }
-};
+}
 </script>
 
 <style scoped>
 .form-container {
-  width: 100%;
-  max-width: 400px;
+  width: 60%;
   margin: 10px auto;
   padding: 15px;
   background: #f8f8f8;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  color: #555;
 }
 
 .form-group {
   margin-bottom: 12px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
 .form-group label {
@@ -113,8 +108,8 @@ const validarCodigo = () => {
   border: 1px solid #888;
   border-radius: 5px;
   outline: none;
+  width: 60%;
 }
-
 .error-message {
   color: red;
   font-size: 0.75rem;

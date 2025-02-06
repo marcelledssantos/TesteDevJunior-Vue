@@ -14,21 +14,19 @@ export default {
 <style>
 .app-header {
   background-color: #ccc;
-  border: 2px solid #333;
+  border: 1px solid #333;
   padding: 0 20px;
   font-size: 1.5rem;
-  color: #333;
+  background-color: rgba(211, 211, 211, 0.6);
   text-align: right;
-  position: fixed;
+  transform: translate(12.5%);
   top: 50px;
-  left: 50%;
-  transform: translateX(-50%);
   width: 80%;
-  height: 8%;
+  height: 8vh;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  z-index: 1000;
   box-sizing: border-box;
+  color: #555;
 }
 </style>
