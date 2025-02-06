@@ -30,7 +30,7 @@
     </table>
 
     <div class="button-container">
-      <ButtonComponent label="Incluir" @click="irParaCadastro" />
+      <ButtonComponent label="Incluir" @click="irParaInclusao" />
     </div>
   </div>
 </template>
@@ -66,13 +66,17 @@ export default defineComponent({
       subestacoes.value = JSON.parse(route.query.data as string)
     }
 
-    const irParaCadastro = () => {
-      router.push('/cadastrar-subestacao')
-    }
+  
+
+    const irParaInclusao = () => {
+  router.push("/inclusao");
+};
+
+    
 
     return {
       subestacoes,
-      irParaCadastro,
+      irParaInclusao,
     }
   },
 })
