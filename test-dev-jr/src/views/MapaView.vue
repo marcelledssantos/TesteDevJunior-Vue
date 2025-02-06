@@ -1,5 +1,12 @@
 <template>
   <div class="mapa-page">
+    <header class="header">
+      <nav class="breadcrumb">
+        <a href="javascript:void(0);" @click="irParaHome">Home</a>
+        <a href="javascript:void(0);" @click="carregarSubestacoes">Subestações</a>
+        <a href="javascript:void(0);">Visualização</a>
+      </nav>
+    </header>
     <fieldset>
       <legend>Subestação</legend>
       <div class="subestacao-details">
@@ -105,6 +112,39 @@ export default defineComponent({
   margin: 20px auto;
   width: 80%;
 }
+.header {
+  text-align: left;
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: rgba(211, 211, 211, 0.2);
+  width: 25%;
+  height: 2vh;
+  margin-left: 19%;
+}
+.breadcrumb {
+  font-size: 0.9rem;
+  display: flex;
+  gap: 10px;
+}
+
+.breadcrumb a {
+  color: #007bff;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.breadcrumb a:hover {
+  background-color: #e0e0e0;
+}
+
+.breadcrumb a:last-child {
+  color: #555;
+  font-weight: bold;
+  pointer-events: none;
+}
+
 .mapa-page h5 {
   font-size: 0.5;
   color: #e61b26;

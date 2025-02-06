@@ -3,7 +3,7 @@
     <header class="header">
       <nav class="breadcrumb">
         <a href="javascript:void(0);" @click="irParaHome">Home</a>
-        <a href="javascript:void(0);" @click="carregarSubestacoes">Subestação</a>
+        <a href="javascript:void(0);" @click="carregarSubestacoes">Subestações</a>
         <a href="javascript:void(0);">Inclusão</a>
       </nav>
     </header>
@@ -88,7 +88,6 @@ const incluirSubestacao = async () => {
         window.location.reload()
       }, 5000)
     }
-
     mensagemTipo.value = 'erro'
   }
 }
@@ -136,6 +135,7 @@ const cancelarInclusao = async () => {
 }
 </script>
 <style scoped>
+
 .inclusao-page {
   display: flex;
   flex-direction: column;
