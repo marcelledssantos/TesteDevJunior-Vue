@@ -23,7 +23,11 @@
             <font-awesome-icon :icon="['fas', 'pen']" class="icon" />
           </td>
           <td>
-            <font-awesome-icon :icon="['fas', 'globe']" class="icon" />
+            <font-awesome-icon 
+              :icon="['fas', 'globe']" 
+              class="icon mapa-icon"
+              @click="exibirNoMapa(subestacao)" 
+            />
           </td>
         </tr>
       </tbody>
@@ -49,6 +53,8 @@ library.add(faPen, faGlobe)
 interface Subestacao {
   codigo: string
   nome: string
+  latitude?: number
+  longitude?: number
 }
 
 export default defineComponent({
@@ -70,9 +76,27 @@ export default defineComponent({
       router.push('/inclusao')
     }
 
+    const exibirNoMapa = (subestacao: Subestacao) => {
+      if (!subestacao.latitude || !subestacao.longitude) {
+        alert('Coordenadas não disponíveis para essa subestação.')
+        return
+      }
+
+      router.push({
+        path: '/mapa',
+        query: {
+          codigo: subestacao.codigo,
+          nome: subestacao.nome,
+          latitude: subestacao.latitude,
+          longitude: subestacao.longitude
+        }
+      })
+    }
+
     return {
       subestacoes,
       irParaInclusao,
+      exibirNoMapa
     }
   },
 })
@@ -96,14 +120,15 @@ h6 {
   width: 60%;
   padding-left: 10px;
 }
-.subestacao-table thead {
-  background-color: #ccc;
-}
 
 .subestacao-table {
   width: 60%;
   border-collapse: collapse;
   font-size: 0.7rem;
+}
+
+.subestacao-table thead {
+  background-color: #ccc;
 }
 
 .subestacao-table th,
@@ -114,31 +139,12 @@ h6 {
   color: #555;
 }
 
-.subestacao-table th:nth-child(1),
-.subestacao-table td:nth-child(1),
-.subestacao-table th:nth-child(4),
-.subestacao-table td:nth-child(4),
-.subestacao-table th:nth-child(5),
-.subestacao-table td:nth-child(5) {
-  width: 15%;
-}
-
-.delete-btn {
-  background: none;
-  border: none;
-  color: #555;
-  font-size: 0.6rem;
-  cursor: pointer;
-  padding: 0;
-  text-decoration: none;
-}
-
-.delete-btn:hover {
-  text-decoration: underline;
-}
-
 .icon {
   cursor: pointer;
+}
+
+.mapa-icon:hover {
+  color: blue;
 }
 
 .button-container {
@@ -146,20 +152,5 @@ h6 {
   justify-content: flex-end;
   width: 60%;
   margin-top: 8px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.button-container button {
-  width: 100px;
-  height: 20px;
-  font-size: 0.7rem;
-  color: #555;
-  padding: 6px 10px;
-  position: relative;
-  transition: all 0.2s ease-in-out;
-  box-shadow:
-    3px 3px 5px rgba(0, 0, 0, 0.2),
-    -3px -3px 5px rgba(255, 255, 255, 0.5);
 }
 </style>

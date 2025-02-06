@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import LoginView from "@/views/LoginView.vue";
 import SubestacoesView from "@/views/SubestacoesView.vue";
 import InclusaoView from '@/views/InclusaoView.vue';
+import MapaView from '@/views/MapaView.vue';
 
 const routes = [
   {
@@ -18,6 +19,10 @@ const routes = [
     path: "/subestacoes",
     name: "subestacoes",
     component: SubestacoesView,
+  },
+  {
+    path: '/mapa',
+    component: MapaView, // Página de visualização no mapa
   },
  
 ];
