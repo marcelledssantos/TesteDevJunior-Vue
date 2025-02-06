@@ -1,12 +1,6 @@
 <template>
   <div class="mapa-page">
-    <header class="header">
-      <nav class="breadcrumb">
-        <a href="javascript:void(0);" @click="irParaHome">Home</a>
-        <a href="javascript:void(0);" @click="carregarSubestacoes">Subestações</a>
-        <a href="javascript:void(0);">Visualização</a>
-      </nav>
-    </header>
+    <HeaderNav ultimaPagina="Visualização" />
     <fieldset>
       <legend>Subestação</legend>
       <div class="subestacao-details">
@@ -52,9 +46,13 @@
 import { defineComponent, ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import axios from 'axios'
+import HeaderNav from '@/components/HeaderNav.vue'
 
 export default defineComponent({
   name: 'MapaView',
+  components: {
+    HeaderNav,
+  },
   setup() {
     const route = useRoute()
     const router = useRouter()
@@ -112,31 +110,8 @@ export default defineComponent({
   margin: 20px auto;
   width: 80%;
 }
-.header {
-  text-align: left;
-  padding: 10px;
-  margin-bottom: 20px;
-  background-color: rgba(211, 211, 211, 0.2);
-  width: 25%;
-  height: 2vh;
-  margin-left: 19%;
-}
-.breadcrumb {
-  font-size: 0.9rem;
-  display: flex;
-  gap: 10px;
-}
-
-.breadcrumb a {
-  color: #007bff;
-  text-decoration: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-}
-
-.breadcrumb a:hover {
-  background-color: #e0e0e0;
+.mapa-page .header {
+  margin-left: -0.8px;
 }
 
 .breadcrumb a:last-child {

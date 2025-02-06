@@ -1,20 +1,12 @@
 <template>
   <div class="inclusao-page">
-    <header class="header">
-      <nav class="breadcrumb">
-        <a href="javascript:void(0);" @click="irParaHome">Home</a>
-        <a href="javascript:void(0);" @click="carregarSubestacoes">Subestações</a>
-        <a href="javascript:void(0);">Inclusão</a>
-      </nav>
-    </header>
-
+    <HeaderNav ultimaPagina="Inclusão" />
     <div class="forms-container">
       <SubestacaoForm @atualizarDados="atualizarSubestacao" />
 
       <RedeMTForm @atualizarRedes="atualizarRedesMT" />
     </div>
 
-    <!-- Botões de Ação -->
     <div class="buttons">
       <ButtonComponent label="Cancelar" @click="cancelarInclusao" />
       <ButtonComponent label="Incluir" type="submit" @click="incluirSubestacao" />
@@ -33,6 +25,7 @@ import axios from 'axios'
 import ButtonComponent from '@/components/ButtonComponent.vue'
 import SubestacaoForm from '@/components/SubestacaoForm.vue'
 import RedeMTForm from '@/components/RedeMTForm.vue'
+import HeaderNav from '@/components/HeaderNav.vue'
 
 const router = useRouter()
 const mensagem = ref('')
@@ -91,29 +84,6 @@ const incluirSubestacao = async () => {
     mensagemTipo.value = 'erro'
   }
 }
-
-const carregarSubestacoes = async () => {
-  try {
-    const response = await axios.get('http://localhost:8080/subestacoes')
-
-    if (response.status === 200) {
-      router.push({
-        path: '/subestacoes',
-        query: { data: JSON.stringify(response.data) },
-      })
-    } else {
-      alert('Erro ao buscar as subestações. Tente novamente.')
-    }
-  } catch (error) {
-    console.error('Erro ao buscar subestações:', error)
-    alert('Erro ao conectar ao servidor.')
-  }
-}
-
-const irParaHome = () => {
-  window.location.href = '/'
-}
-
 const cancelarInclusao = async () => {
   if (confirm('Deseja realmente cancelar? As alterações serão perdidas.')) {
     try {
@@ -135,7 +105,6 @@ const cancelarInclusao = async () => {
 }
 </script>
 <style scoped>
-
 .inclusao-page {
   display: flex;
   flex-direction: column;
@@ -150,41 +119,6 @@ const cancelarInclusao = async () => {
   background-color: #f9f9f9;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
-
-.header {
-  text-align: left;
-  padding: 10px;
-  margin-bottom: 20px;
-  background-color: rgba(211, 211, 211, 0.2);
-  width: 25%;
-  height: 2vh;
-  margin-left: 19%;
-}
-
-.breadcrumb {
-  font-size: 0.9rem;
-  display: flex;
-  gap: 10px;
-}
-
-.breadcrumb a {
-  color: #007bff;
-  text-decoration: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-}
-
-.breadcrumb a:hover {
-  background-color: #e0e0e0;
-}
-
-.breadcrumb a:last-child {
-  color: #555;
-  font-weight: bold;
-  pointer-events: none;
-}
-
 .forms-container {
   display: flex;
   flex-direction: column;

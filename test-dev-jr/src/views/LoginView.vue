@@ -24,7 +24,6 @@
           @blur="validarSenha"
         />
       </div>
-
       <ButtonComponent label="Entrar" @click="entrar" />
     </div>
   </div>

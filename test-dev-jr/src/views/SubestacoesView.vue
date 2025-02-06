@@ -23,10 +23,10 @@
             <font-awesome-icon :icon="['fas', 'pen']" class="icon" />
           </td>
           <td>
-            <font-awesome-icon 
-              :icon="['fas', 'globe']" 
+            <font-awesome-icon
+              :icon="['fas', 'globe']"
               class="icon mapa-icon"
-              @click="exibirNoMapa(subestacao)" 
+              @click="exibirNoMapa(subestacao)"
             />
           </td>
         </tr>
@@ -88,15 +88,15 @@ export default defineComponent({
           codigo: subestacao.codigo,
           nome: subestacao.nome,
           latitude: subestacao.latitude,
-          longitude: subestacao.longitude
-        }
+          longitude: subestacao.longitude,
+        },
       })
     }
 
     return {
       subestacoes,
       irParaInclusao,
-      exibirNoMapa
+      exibirNoMapa,
     }
   },
 })

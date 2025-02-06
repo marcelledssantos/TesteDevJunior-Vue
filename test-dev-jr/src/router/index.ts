@@ -22,9 +22,9 @@ const routes = [
   },
   {
     path: '/mapa',
-    component: MapaView, // Página de visualização no mapa
+    component: MapaView,
   },
- 
+
 ];
 
 const router = createRouter({

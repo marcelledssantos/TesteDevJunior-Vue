@@ -75,7 +75,7 @@ legend {
 .tabela-redes th {
   background-color: #ccc;
   color: #333;
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 .tabela-redes td {
@@ -88,7 +88,7 @@ legend {
   border: none;
   border-radius: 5px;
   padding: 5px 10px;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -98,7 +98,7 @@ legend {
 }
 .footer-buttons button {
   padding: 5px 15px;
-  font-size: 0.9rem;
+  font-size: 0.6rem;
   border-radius: 5px;
   border: 1px solid #ccc;
   cursor: pointer;
